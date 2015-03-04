@@ -10,7 +10,7 @@
 		321C305A1AA740EC00527996 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 321C30591AA740EC00527996 /* main.cpp */; };
 		321C30621AA743FB00527996 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 321C30601AA743FB00527996 /* GLUT.framework */; };
 		321C30631AA743FB00527996 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 321C30611AA743FB00527996 /* OpenGL.framework */; };
-		3A8524C31AA784BA006B8109 /* card.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A8524C21AA784BA006B8109 /* card.cpp */; };
+		3A8524C31AA784BA006B8109 /* Card.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A8524C21AA784BA006B8109 /* Card.cpp */; };
 		3A8524C51AA78967006B8109 /* Deck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A8524C41AA78967006B8109 /* Deck.cpp */; };
 /* End PBXBuildFile section */
 
@@ -33,7 +33,7 @@
 		321C30611AA743FB00527996 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		3A7BC1231AA76FBD000CAA4C /* Card.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Card.h; sourceTree = "<group>"; };
 		3A7BC1241AA77121000CAA4C /* Deck.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Deck.h; sourceTree = "<group>"; };
-		3A8524C21AA784BA006B8109 /* card.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = card.cpp; sourceTree = "<group>"; };
+		3A8524C21AA784BA006B8109 /* Card.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Card.cpp; sourceTree = "<group>"; };
 		3A8524C41AA78967006B8109 /* Deck.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Deck.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -73,7 +73,7 @@
 			children = (
 				321C30591AA740EC00527996 /* main.cpp */,
 				3A7BC1231AA76FBD000CAA4C /* Card.h */,
-				3A8524C21AA784BA006B8109 /* card.cpp */,
+				3A8524C21AA784BA006B8109 /* Card.cpp */,
 				3A7BC1241AA77121000CAA4C /* Deck.h */,
 				3A8524C41AA78967006B8109 /* Deck.cpp */,
 			);
@@ -138,7 +138,7 @@
 			files = (
 				3A8524C51AA78967006B8109 /* Deck.cpp in Sources */,
 				321C305A1AA740EC00527996 /* main.cpp in Sources */,
-				3A8524C31AA784BA006B8109 /* card.cpp in Sources */,
+				3A8524C31AA784BA006B8109 /* Card.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
