@@ -14,8 +14,7 @@
 using namespace std;
 #include "Card.h"
 
-class Deck
-{
+class Deck{
 public:
     // Constructor
     Deck();
@@ -23,6 +22,8 @@ public:
     // Otros Metodos
     char getSuit(int k);
     char getValue(int k);
+    int getIndex();
+    void resetIndex();
     void shuffle();
     Card dealCard();
     char * str();
@@ -31,6 +32,7 @@ public:
 
 private:
     // Atributos
+    int index = 0;
     Card d[52]={
         Card('C','A'), Card('C','2'), Card('C','3'), Card('C','4'),Card('C','5'),
         Card('C','6'), Card('C','7'), Card('C','8'), Card('C','9'),Card('C','T'),
