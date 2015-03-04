@@ -14,6 +14,10 @@ int scoreDealer=0;
 int points=0;
 int pointsDealer=0;
 
+char numeros[13] = { 'A','2', '3', '4', '5', '6','7',
+    '8', '9', 'T', 'J', 'Q','K'};
+char palos[4] = { 'D','S', 'H', 'C'};
+
 void init()
 {
     // Para que las paredes se vean sólidas (no transparentes)
@@ -22,6 +26,13 @@ void init()
     glEnable(GL_BLEND);
     
     
+}
+
+
+std::string cToString(char a){
+    std::stringstream ss;
+    ss << a;
+    return ss.str();
 }
 
 std::string toString(int value) {
@@ -40,7 +51,7 @@ void drawText(float x, float y, float size, std::string text, void* font) {
         char c = *i;
         glutStrokeCharacter(GLUT_STROKE_ROMAN, c);
         glPopMatrix();
-        x+=70;
+        x+=75;
     }
 }
 
@@ -53,14 +64,46 @@ void dibuja()
     drawText(-1000, 850, 0.4, "SCORE " +toString(score), GLUT_BITMAP_9_BY_15);
     drawText(-100, 850, 0.4, "SCORE DEALER " +toString(scoreDealer), GLUT_BITMAP_9_BY_15);
     
-    drawText(-1200, 400, 0.4, "DEALER", GLUT_BITMAP_9_BY_15);
+    drawText(-1200, 400, 0.4, "DEALER ", GLUT_BITMAP_9_BY_15);
     drawText(-1200, -300, 0.4, "PLAYER", GLUT_BITMAP_9_BY_15);
     
-    drawText(500, 400, 0.3, "PTS DEALER " +toString(points), GLUT_BITMAP_9_BY_15);
-    drawText(500, -300, 0.3, "PTS PLAYER " +toString(pointsDealer), GLUT_BITMAP_9_BY_15);
+    drawText(800, 400, 0.3, "DEALER " +toString(points), GLUT_BITMAP_9_BY_15);
+    drawText(800, -300, 0.3, "PLAYER " +toString(pointsDealer), GLUT_BITMAP_9_BY_15);
     
     drawText(-1200, -900, 0.4, "D-DEAL H-HIT S-STAND ESC-SALIR", GLUT_BITMAP_9_BY_15);
     drawText(-1200, -1200, 0.4, "AUTOR: ROBERTO MTZ A01190757 ", GLUT_BITMAP_9_BY_15);
+    
+    
+    glColor3d(1,1,1);
+    drawText(-660, 400, 0.4,cToString(palos[rand() % 4]) +cToString(numeros[rand() % 14]), GLUT_BITMAP_9_BY_15);
+    drawText(-410, 400, 0.4,cToString(palos[rand() % 4]) +cToString(numeros[rand() % 14]), GLUT_BITMAP_9_BY_15);
+    drawText(-160, 400, 0.4,cToString(palos[rand() % 4]) +cToString(numeros[rand() % 14]), GLUT_BITMAP_9_BY_15);
+    drawText(90, 400, 0.4,cToString(palos[rand() % 4]) +cToString(numeros[rand() % 14]), GLUT_BITMAP_9_BY_15);
+    drawText(340, 400, 0.4,cToString(palos[rand() % 4]) +cToString(numeros[rand() % 14]), GLUT_BITMAP_9_BY_15);
+    
+    
+    drawText(-660, -300, 0.4,cToString(palos[rand() % 4]) +cToString(numeros[rand() % 14]), GLUT_BITMAP_9_BY_15);
+    drawText(-410, -300, 0.4,cToString(palos[rand() % 4]) +cToString(numeros[rand() % 14]), GLUT_BITMAP_9_BY_15);
+    drawText(-160, -300, 0.4,cToString(palos[rand() % 4]) +cToString(numeros[rand() % 14]), GLUT_BITMAP_9_BY_15);
+    drawText(90, -300, 0.4,cToString(palos[rand() % 4]) +cToString(numeros[rand() % 14]), GLUT_BITMAP_9_BY_15);
+    drawText(340, -300, 0.4,cToString(palos[rand() % 4]) +cToString(numeros[rand() % 14]), GLUT_BITMAP_9_BY_15);
+    
+    
+    
+    glColor3d(1, .5, .5);
+    glRectd(-200, 300, -280, 130);
+    glRectd(-100, 300, -180, 130);
+    glRectd(   0, 300,  -80, 130);
+    glRectd( 100, 300,   20, 130);
+    glRectd( 200, 300,  120, 130);
+    
+    
+    glColor3d(0, .5, .5);
+    glRectd(-200, 20, -280, -150);
+    glRectd(-100, 20, -180, -150);
+    glRectd(   0, 20,  -80, -150);
+    glRectd( 100, 20,   20, -150);
+    glRectd( 200, 20,  120, -150);
     
     glPushMatrix() ;
     glTranslated(0, 0, 0);
