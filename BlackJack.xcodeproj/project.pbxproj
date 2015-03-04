@@ -29,6 +29,8 @@
 		321C30591AA740EC00527996 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		321C30601AA743FB00527996 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		321C30611AA743FB00527996 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		3A7BC1231AA76FBD000CAA4C /* Card.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Card.h; sourceTree = "<group>"; };
+		3A7BC1241AA77121000CAA4C /* Deck.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Deck.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,8 @@
 			isa = PBXGroup;
 			children = (
 				321C30591AA740EC00527996 /* main.cpp */,
+				3A7BC1231AA76FBD000CAA4C /* Card.h */,
+				3A7BC1241AA77121000CAA4C /* Deck.h */,
 			);
 			path = BlackJack;
 			sourceTree = "<group>";
@@ -240,6 +244,7 @@
 				321C305F1AA740EC00527996 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
