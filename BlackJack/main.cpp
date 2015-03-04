@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <sstream>
 #include <iostream>
+#include <ctime>
 
 int score=0;
 int scoreDealer=0;
@@ -128,6 +129,7 @@ void reshape(int ancho, int alto)
 
 int main(int argc, char *argv[])
 {
+    srand ( time(NULL) );
     glutInit(&argc, argv);
     glutInitWindowSize(640,480);
     glutInitWindowPosition(10,10);
