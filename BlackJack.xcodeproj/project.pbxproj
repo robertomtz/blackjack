@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		321C305A1AA740EC00527996 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 321C30591AA740EC00527996 /* main.cpp */; };
+		321C30621AA743FB00527996 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 321C30601AA743FB00527996 /* GLUT.framework */; };
+		321C30631AA743FB00527996 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 321C30611AA743FB00527996 /* OpenGL.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +27,8 @@
 /* Begin PBXFileReference section */
 		321C30561AA740EC00527996 /* BlackJack */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BlackJack; sourceTree = BUILT_PRODUCTS_DIR; };
 		321C30591AA740EC00527996 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		321C30601AA743FB00527996 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		321C30611AA743FB00527996 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +36,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				321C30621AA743FB00527996 /* GLUT.framework in Frameworks */,
+				321C30631AA743FB00527996 /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -41,6 +47,8 @@
 		321C304D1AA740EC00527996 = {
 			isa = PBXGroup;
 			children = (
+				321C30601AA743FB00527996 /* GLUT.framework */,
+				321C30611AA743FB00527996 /* OpenGL.framework */,
 				321C30581AA740EC00527996 /* BlackJack */,
 				321C30571AA740EC00527996 /* Products */,
 			);
