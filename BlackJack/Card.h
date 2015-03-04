@@ -24,6 +24,7 @@ public:
     void setSuit(char ss); void setValue(char vv);
     // metodos de acceso
     char getSuit(); char getValue();
+    int getNumber();
     // otros métodos
     void muestra();
     static void dibujaPoligono(int xMin, int xMax, int yMin, int yMax); void draw(int x, int y);

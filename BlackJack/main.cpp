@@ -9,15 +9,14 @@
 #include <sstream>
 #include <iostream>
 #include <ctime>
+#include "Card.h"
+#include "Deck.h"
 
 int score=0;
 int scoreDealer=0;
 int points=0;
 int pointsDealer=0;
-
-char numeros[13] = { 'A','2', '3', '4', '5', '6','7',
-    '8', '9', 'T', 'J', 'Q','K'};
-char palos[4] = { 'D','S', 'H', 'C'};
+Deck deck = Deck();
 
 void init()
 {
@@ -59,7 +58,7 @@ void drawText(float x, float y, float size, std::string text, void* font) {
 void dibuja()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    
+    glColor3d(1,1,1);
     drawText(-400, 850, 0.5, "BLACKJACK", GLUT_BITMAP_9_BY_15);
     
     drawText(-1000, 850, 0.4, "SCORE " +toString(score), GLUT_BITMAP_9_BY_15);
@@ -76,19 +75,49 @@ void dibuja()
     
     
     glColor3d(1,1,1);
-    drawText(-660, 400, 0.4,cToString(palos[rand() % 4]) +cToString(numeros[rand() % 14]), GLUT_BITMAP_9_BY_15);
-    drawText(-410, 400, 0.4,cToString(palos[rand() % 4]) +cToString(numeros[rand() % 14]), GLUT_BITMAP_9_BY_15);
-    drawText(-160, 400, 0.4,cToString(palos[rand() % 4]) +cToString(numeros[rand() % 14]), GLUT_BITMAP_9_BY_15);
-    drawText(90, 400, 0.4,cToString(palos[rand() % 4]) +cToString(numeros[rand() % 14]), GLUT_BITMAP_9_BY_15);
-    drawText(340, 400, 0.4,cToString(palos[rand() % 4]) +cToString(numeros[rand() % 14]), GLUT_BITMAP_9_BY_15);
-    
-    
-    drawText(-660, -300, 0.4,cToString(palos[rand() % 4]) +cToString(numeros[rand() % 14]), GLUT_BITMAP_9_BY_15);
-    drawText(-410, -300, 0.4,cToString(palos[rand() % 4]) +cToString(numeros[rand() % 14]), GLUT_BITMAP_9_BY_15);
-    drawText(-160, -300, 0.4,cToString(palos[rand() % 4]) +cToString(numeros[rand() % 14]), GLUT_BITMAP_9_BY_15);
-    drawText(90, -300, 0.4,cToString(palos[rand() % 4]) +cToString(numeros[rand() % 14]), GLUT_BITMAP_9_BY_15);
-    drawText(340, -300, 0.4,cToString(palos[rand() % 4]) +cToString(numeros[rand() % 14]), GLUT_BITMAP_9_BY_15);
-    
+    points = 0;
+    pointsDealer = 0;
+
+    drawText(-660, 400, 0.4,cToString(deck.getSuit(0)) +cToString(deck.getValue(0)), GLUT_BITMAP_9_BY_15);
+    drawText(-410, 400, 0.4,cToString(deck.getSuit(1)) +cToString(deck.getValue(1)), GLUT_BITMAP_9_BY_15);
+    drawText(-160, 400, 0.4,cToString(deck.getSuit(2)) +cToString(deck.getValue(2)), GLUT_BITMAP_9_BY_15);
+    drawText(90, 400, 0.4,cToString(deck.getSuit(3)) +cToString(deck.getValue(3)), GLUT_BITMAP_9_BY_15);
+    drawText(340, 400, 0.4,cToString(deck.getSuit(4)) +cToString(deck.getValue(4)), GLUT_BITMAP_9_BY_15);
+
+    char value;
+    int vala = 0;
+    for (int i = 0; i<=4; i++) {
+        value = deck.getValue(i);
+        if ( value == 'A') {
+            vala = 11;
+        }else if (value == 'K' || value == 'Q' || value == 'T' || value == 'J'){
+            vala = 10;
+        }else{
+            vala = value - '0';
+        }
+        points += vala;
+    }
+
+    drawText(-660, -300, 0.4,cToString(deck.getSuit(5)) +cToString(deck.getValue(5)), GLUT_BITMAP_9_BY_15);
+    drawText(-410, -300, 0.4,cToString(deck.getSuit(6)) +cToString(deck.getValue(6)), GLUT_BITMAP_9_BY_15);
+    drawText(-160, -300, 0.4,cToString(deck.getSuit(7)) +cToString(deck.getValue(7)), GLUT_BITMAP_9_BY_15);
+    drawText(90, -300, 0.4,cToString(deck.getSuit(8)) +cToString(deck.getValue(8)), GLUT_BITMAP_9_BY_15);
+    drawText(340, -300, 0.4,cToString(deck.getSuit(9)) +cToString(deck.getValue(9)), GLUT_BITMAP_9_BY_15);
+
+    vala = 0;
+    for (int i = 5; i<=9; i++) {
+        value = deck.getValue(i);
+        if ( value == 'A') {
+            vala = 11;
+        }else if (value == 'K' || value == 'Q' || value == 'T' || value == 'J'){
+            vala = 10;
+        }else{
+            vala = value - '0';
+        }
+        pointsDealer += vala;
+    }
+
+
     
     
     glColor3d(1, .5, .5);

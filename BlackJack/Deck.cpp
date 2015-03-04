@@ -11,10 +11,14 @@
 #include <iostream>
 #include <stdlib.h>
 #include <string>
+#include <ctime>
+int myrandom (int i) { return std::rand()%i;}
 
 using namespace std;
 
-Deck:: Deck() {}
+Deck:: Deck() {
+    shuffle();
+}
 
 int Deck::getIndex(){
     return index;
@@ -29,7 +33,8 @@ char Deck::getValue(int k) {
     return d[k].getValue();
 }
 void Deck::shuffle() {
-    random_shuffle(&d[0], &d[52]);
+    srand ( time(NULL) );
+    random_shuffle(&d[0], &d[52], myrandom);
 }
 Card Deck::dealCard() {
     Card card = d[index];
