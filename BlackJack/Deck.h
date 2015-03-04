@@ -9,22 +9,42 @@
 #ifndef BlackJack_Deck_h
 #define BlackJack_Deck_h
 
+#include <iostream>
+#include <string.h>
 using namespace std;
+#include "Card.h"
 
-class Deck {
+class Deck
+{
 public:
     // Constructor
-    Deck(char ss, char vv);
-    // metodos modificadores
-    void setSuit(char ss); void setValue(char vv);
-    // metodos de acceso
-    char getSuit(); char getValue();
-    // otros métodos
-    void muestra();
-    static void dibujaPoligono(int xMin, int xMax, int yMin, int yMax); void draw(int x, int y);
+    Deck();
+
+    // Otros Metodos
+    char getSuit(int k);
+    char getValue(int k);
+    void shuffle();
+    Card dealCard();
+    char * str();
+    //void dibuja();
+
+
 private:
     // Atributos
-    char s, v;
+    Card d[52]={
+        Card('C','A'), Card('C','A'), Card('C','A'), Card('C','A'),Card('C','A'),
+        Card('C','A'), Card('C','A'), Card('C','A'), Card('C','A'),Card('C','A'),
+        Card('C','A'), Card('C','A'), Card('C','A'), Card('C','A'),Card('C','A'),
+        Card('C','A'), Card('C','A'), Card('C','A'), Card('C','A'),Card('C','A'),
+        Card('C','A'), Card('C','A'), Card('C','A'), Card('C','A'),Card('C','A'),
+        Card('C','A'), Card('C','A'), Card('C','A'), Card('C','A'),Card('C','A'),
+        Card('C','A'), Card('C','A'), Card('C','A'), Card('C','A'),Card('C','A'),
+        Card('C','A'), Card('C','A'), Card('C','A'), Card('C','A'),Card('C','A'),
+        Card('C','A'), Card('C','A'), Card('C','A'), Card('C','A'),Card('C','A'),
+        Card('C','A'), Card('C','A'), Card('C','A'),Card('C','A'),Card('C','A'),
+        Card('C','A'), Card('C','A')
+    };
+
 };
 
-#endif
+#endif /* defined(__BlackJack__Deck__) */
