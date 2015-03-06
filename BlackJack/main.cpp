@@ -18,6 +18,8 @@ int points=0;
 int pointsDealer=0;
 int turno=1;
 int turnoDealer=1;
+int as=0;
+int asDealer=0;
 
 bool stand=false;
 bool fin=false;
@@ -68,10 +70,12 @@ void dibuja()
     //puntos actuales jugador y dealer
     char value;
     int vala = 0;
+    as=0;
     for (int i = 0; i<=turno; i++) {
         value = deck.getValue(i);
         if ( value == 'A') {
             vala = 11;
+            as++;
         }else if (value == 'K' || value == 'Q' || value == 'T' || value == 'J'){
             vala = 10;
         }else{
@@ -80,13 +84,48 @@ void dibuja()
         points += vala;
     }
     
-    if (points>=21) {
+    if (points>21) {
+        if (as==0) {
+            stand=true;
+        } else{
+            points-=10;
+            as--;
+            if (points>21) {
+                if (as==0) {
+                  stand=true;
+                } else{
+                    points-=10;
+                    as--;
+                    if (points>21) {
+                        if (as==0) {
+                            stand=true;
+                        } else{
+                            points-=10;
+                            as--;
+                            if (points>21) {
+                                if (as==0) {
+                                    stand=true;
+                                } else{
+                                    points-=10;
+                                    as--;
+                                    if (points>21) {
+                                        stand=true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    if (points==21) {
         stand=true;
     }
     
     
-    
-    
+    asDealer=0;
     if (stand) {
         while (!fin) {
             if (points>21) {
@@ -100,6 +139,7 @@ void dibuja()
                     value = deck.getValue(i);
                     if ( value == 'A') {
                         vala = 11;
+                        asDealer++;
                     }else if (value == 'K' || value == 'Q' || value == 'T' || value == 'J'){
                         vala = 10;
                     }else{
@@ -108,9 +148,50 @@ void dibuja()
                     pointsDealer += vala;
                 }
             } else if (pointsDealer>21){
-                score++;
-                fin=true;
-                deal=false;
+                if (asDealer==0) {
+                    score++;
+                    fin=true;
+                    deal=false;
+                } else{
+                    pointsDealer-=10;
+                    asDealer--;
+                    if (pointsDealer>21) {
+                        if (asDealer==0) {
+                            score++;
+                            fin=true;
+                            deal=false;
+                        } else{
+                            pointsDealer-=10;
+                            asDealer--;
+                            if (pointsDealer>21) {
+                                if (asDealer==0) {
+                                    score++;
+                                    fin=true;
+                                    deal=false;
+                                } else{
+                                    pointsDealer-=10;
+                                    asDealer--;
+                                    if (pointsDealer>21) {
+                                        if (asDealer==0) {
+                                            score++;
+                                            fin=true;
+                                            deal=false;
+                                        } else{
+                                            pointsDealer-=10;
+                                            asDealer--;
+                                            if (pointsDealer>21) {
+                                                score++;
+                                                fin=true;
+                                                deal=false;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                
             } else{
                 fin=true;
                 deal=false;
