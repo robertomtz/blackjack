@@ -21,6 +21,7 @@ int turnoDealer=1;
 
 bool stand=false;
 bool fin=false;
+bool deal=false;//checa que solo se pueda dealear una vez
 Deck deck = Deck();
 
 void init()
@@ -79,37 +80,48 @@ void dibuja()
         points += vala;
     }
     
-    vala = 0;
-    for (int i = 5; i<=5+turnoDealer; i++) {
-        value = deck.getValue(i);
-        if ( value == 'A') {
-            vala = 11;
-        }else if (value == 'K' || value == 'Q' || value == 'T' || value == 'J'){
-            vala = 10;
-        }else{
-            vala = value - '0';
-        }
-        pointsDealer += vala;
+    if (points>=21) {
+        stand=true;
     }
     
     
-//    if (stand) {
-//        while (!fin) {
-//            if (pointsDealer<17) {
-//                turnoDealer++;
-//            } else if (pointsDealer>21){
-//                score++;
-//                fin=true;
-//            } else{
-//                fin=true;
-//                if (points>pointsDealer) {
-//                    score++;
-//                }else{
-//                    scoreDealer++;
-//                }
-//            }
-//        }
-//    }
+    
+    
+    if (stand) {
+        while (!fin) {
+            if (points>21) {
+                scoreDealer++;
+                fin=true;
+                deal=false;
+            } else if (pointsDealer<17) {
+                turnoDealer++;
+                vala = 0;
+                for (int i = 5; i<=5+turnoDealer; i++) {
+                    value = deck.getValue(i);
+                    if ( value == 'A') {
+                        vala = 11;
+                    }else if (value == 'K' || value == 'Q' || value == 'T' || value == 'J'){
+                        vala = 10;
+                    }else{
+                        vala = value - '0';
+                    }
+                    pointsDealer += vala;
+                }
+            } else if (pointsDealer>21){
+                score++;
+                fin=true;
+                deal=false;
+            } else{
+                fin=true;
+                deal=false;
+                if (points>pointsDealer) {
+                    score++;
+                }else{
+                    scoreDealer++;
+                }
+            }
+        }
+    }
     
     
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -159,15 +171,17 @@ void dibuja()
     
     
     //DEALER INFO
-    glColor3d(1,1,1);
-    drawText(-660, 400, 0.4,cToString(deck.getSuit(5)) +cToString(deck.getValue(5)), GLUT_BITMAP_9_BY_15);
-    drawText(-410, 400, 0.4,cToString(deck.getSuit(6)) +cToString(deck.getValue(6)), GLUT_BITMAP_9_BY_15);
-    if (turnoDealer>1) {
-        drawText(-160, 400, 0.4,cToString(deck.getSuit(7)) +cToString(deck.getValue(7)), GLUT_BITMAP_9_BY_15);}
-    if (turnoDealer>2) {
-        drawText(90, 400, 0.4,cToString(deck.getSuit(8)) +cToString(deck.getValue(8)), GLUT_BITMAP_9_BY_15);}
-    if (turnoDealer>3) {
-        drawText(340, 400, 0.4,cToString(deck.getSuit(9)) +cToString(deck.getValue(9)), GLUT_BITMAP_9_BY_15);}
+    if(stand){
+        glColor3d(1,1,1);
+        drawText(-660, 400, 0.4,cToString(deck.getSuit(5)) +cToString(deck.getValue(5)), GLUT_BITMAP_9_BY_15);
+        drawText(-410, 400, 0.4,cToString(deck.getSuit(6)) +cToString(deck.getValue(6)), GLUT_BITMAP_9_BY_15);
+        if (turnoDealer>1) {
+            drawText(-160, 400, 0.4,cToString(deck.getSuit(7)) +cToString(deck.getValue(7)), GLUT_BITMAP_9_BY_15);}
+        if (turnoDealer>2) {
+            drawText(90, 400, 0.4,cToString(deck.getSuit(8)) +cToString(deck.getValue(8)), GLUT_BITMAP_9_BY_15);}
+        if (turnoDealer>3) {
+            drawText(340, 400, 0.4,cToString(deck.getSuit(9)) +cToString(deck.getValue(9)), GLUT_BITMAP_9_BY_15);}
+    }
     
     glColor3d(1, .5, .5);
     glRectd(-200, 300, -280, 130);
@@ -202,6 +216,20 @@ void myKey(unsigned char theKey, int mouseX, int mouseY)
         case 's':
         case 'S':
             stand=true;
+            break;
+            
+        case 'd':
+        case 'D':
+            if(!deal){
+                deal=true;
+                deck.shuffle();
+                points=0;
+                pointsDealer=0;
+                turno=1;
+                turnoDealer=1;
+                stand=false;
+                fin=false;
+            }
             break;
             
         case 27:
