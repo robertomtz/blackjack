@@ -252,9 +252,9 @@ void dibuja()
     
     
     //DEALER INFO
-    if(stand){
         glColor3d(1,1,1);
         drawText(-660, 400, 0.4,cToString(deck.getSuit(5)) +cToString(deck.getValue(5)), GLUT_BITMAP_9_BY_15);
+    if(stand){
         drawText(-410, 400, 0.4,cToString(deck.getSuit(6)) +cToString(deck.getValue(6)), GLUT_BITMAP_9_BY_15);
         if (turnoDealer>1) {
             drawText(-160, 400, 0.4,cToString(deck.getSuit(7)) +cToString(deck.getValue(7)), GLUT_BITMAP_9_BY_15);}
