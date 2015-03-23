@@ -85,38 +85,12 @@ void dibuja()
     }
     
     if (points>21) {
-        if (as==0) {
-            stand=true;
-        } else{
+        while (as!=0 && points>21){
             points-=10;
             as--;
-            if (points>21) {
-                if (as==0) {
-                  stand=true;
-                } else{
-                    points-=10;
-                    as--;
-                    if (points>21) {
-                        if (as==0) {
-                            stand=true;
-                        } else{
-                            points-=10;
-                            as--;
-                            if (points>21) {
-                                if (as==0) {
-                                    stand=true;
-                                } else{
-                                    points-=10;
-                                    as--;
-                                    if (points>21) {
-                                        stand=true;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+        }
+        if (points>21){
+            stand=true;
         }
     }
     
@@ -135,6 +109,7 @@ void dibuja()
             } else if (pointsDealer<17) {
                 turnoDealer++;
                 vala = 0;
+                pointsDealer=0;
                 for (int i = 5; i<=5+turnoDealer; i++) {
                     value = deck.getValue(i);
                     if ( value == 'A') {
@@ -146,52 +121,21 @@ void dibuja()
                         vala = value - '0';
                     }
                     pointsDealer += vala;
+                    cout<<"turno dealer: "<<turnoDealer<<endl;
+                    cout<<"carta: "<<value<<endl;
+                    cout<<pointsDealer<<endl;
                 }
             } else if (pointsDealer>21){
-                if (asDealer==0) {
-                    score++;
-                    fin=true;
-                    deal=false;
-                } else{
+                while (asDealer>0 && pointsDealer>21){
                     pointsDealer-=10;
                     asDealer--;
-                    if (pointsDealer>21) {
-                        if (asDealer==0) {
-                            score++;
-                            fin=true;
-                            deal=false;
-                        } else{
-                            pointsDealer-=10;
-                            asDealer--;
-                            if (pointsDealer>21) {
-                                if (asDealer==0) {
-                                    score++;
-                                    fin=true;
-                                    deal=false;
-                                } else{
-                                    pointsDealer-=10;
-                                    asDealer--;
-                                    if (pointsDealer>21) {
-                                        if (asDealer==0) {
-                                            score++;
-                                            fin=true;
-                                            deal=false;
-                                        } else{
-                                            pointsDealer-=10;
-                                            asDealer--;
-                                            if (pointsDealer>21) {
-                                                score++;
-                                                fin=true;
-                                                deal=false;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
                 }
-                
+                cout<<"correccion As: "<<pointsDealer<<endl;
+                if (pointsDealer>21) {
+                    fin=true;
+                    deal=false;
+                    score++;
+                }
             } else{
                 fin=true;
                 deal=false;
@@ -254,15 +198,14 @@ void dibuja()
     //DEALER INFO
         glColor3d(1,1,1);
         drawText(-660, 400, 0.4,cToString(deck.getSuit(5)) +cToString(deck.getValue(5)), GLUT_BITMAP_9_BY_15);
-    if(stand){
-        drawText(-410, 400, 0.4,cToString(deck.getSuit(6)) +cToString(deck.getValue(6)), GLUT_BITMAP_9_BY_15);
+    if(turnoDealer>1){
+        drawText(-410, 400, 0.4,cToString(deck.getSuit(6)) +cToString(deck.getValue(6)), GLUT_BITMAP_9_BY_15);}
         if (turnoDealer>1) {
             drawText(-160, 400, 0.4,cToString(deck.getSuit(7)) +cToString(deck.getValue(7)), GLUT_BITMAP_9_BY_15);}
         if (turnoDealer>2) {
             drawText(90, 400, 0.4,cToString(deck.getSuit(8)) +cToString(deck.getValue(8)), GLUT_BITMAP_9_BY_15);}
         if (turnoDealer>3) {
             drawText(340, 400, 0.4,cToString(deck.getSuit(9)) +cToString(deck.getValue(9)), GLUT_BITMAP_9_BY_15);}
-    }
     
     glColor3d(1, .5, .5);
     glRectd(-200, 300, -280, 130);
