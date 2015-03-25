@@ -21,7 +21,7 @@ int turnoDealer=1;
 int as=0;
 int asDealer=0;
 const float medida = 40;
-float x=1.0;
+float xRotate=1.0;
 
 bool rotate3d=false;
 bool stand=false;
@@ -33,9 +33,9 @@ Deck deck = Deck();
 void myTimer(int v)
 {
     if (rotate3d) {
-        x=x+1;
-        if (x >= 180) {
-            x = 0;
+        xRotate=xRotate+1;
+        if (xRotate >= 180) {
+            xRotate = 0;
             rotate3d = false;
         }
 
@@ -102,7 +102,7 @@ void dibujaCarta3d(float x, float y){
 
     glPushMatrix();
     glTranslatef(x, y, -100);
-    glRotatef(4, 1.0, 1.0, 0.0);
+    glRotatef(xRotate, 0, 1.0, 0);
 
     glBegin(GL_QUADS);
     //Arriba (amarillo)
@@ -150,7 +150,7 @@ void dibujaMensaje3d(float g){
 
     glPushMatrix();
     glTranslatef(210, 250, -100);
-    glRotatef(x, 1.0, 0, 0);
+    glRotatef(xRotate, 1.0, 0, 0);
 
     glBegin(GL_QUADS);
     glColor3f(0.4, g, 0.7);
