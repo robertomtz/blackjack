@@ -129,10 +129,60 @@ void dibujaCarta3d(float x, float y){
     glPopMatrix();
 }
 
+void dibujaMensaje3d(float g){
+
+    glPushMatrix();
+    glTranslatef(210, 250, -100);
+    glRotatef(4, 1.0, 1.0, 0.0);
+
+    glBegin(GL_QUADS);
+    glColor3f(0.4, g, 0.7);
+    //Arriba
+    glVertex3f( -medida*5.125, medida, -medida );
+    glVertex3f( -medida*5.125, medida,  medida );
+    glVertex3f(  medida*5.125, medida,  medida );
+    glVertex3f(  medida*5.125, medida, -medida );
+
+    //Abajo
+    glVertex3f( -medida*5.125, -medida, -medida );
+    glVertex3f(  medida*5.125, -medida, -medida );
+    glVertex3f(  medida*5.125, -medida,  medida );
+    glVertex3f( -medida*5.125, -medida,  medida );
+
+    //Izquierda
+    glVertex3f( -medida*5.125, -medida, -medida );
+    glVertex3f( -medida*5.125, -medida,  medida );
+    glVertex3f( -medida*5.125,  medida,  medida );
+    glVertex3f( -medida*5.125,  medida, -medida );
+
+    //Derecha =
+    glVertex3f( medida*5.125, -medida, -medida );
+    glVertex3f( medida*5.125,  medida, -medida );
+    glVertex3f( medida*5.125,  medida,  medida );
+    glVertex3f( medida*5.125, -medida,  medida );
+
+    //Frente blanco
+    glVertex3f( -medida*5.125, -medida, medida );
+    glVertex3f(  medida*5.125, -medida, medida );
+    glVertex3f(  medida*5.125,  medida, medida );
+    glVertex3f( -medida*5.125,  medida, medida );
+
+    //Atrás blanco
+    glVertex3f( -medida*5.125, -medida, -medida );
+    glVertex3f( -medida*5.125,  medida, -medida );
+    glVertex3f(  medida*5.125,  medida, -medida );
+    glVertex3f(  medida*5.125, -medida, -medida );
+    glColor3f(1.0, 1.0, 1.0);
+    glEnd();
+    
+    glPopMatrix();
+}
+
 void dibuja()
 {
     //puntos actuales jugador y dealer
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
     char value;
     int vala = 0;
     as=0;
@@ -218,12 +268,16 @@ void dibuja()
 
     glColor3d(1,1,1);
     if (fin && ganoDealer) {
+        dibujaMensaje3d(1);
         drawHelpMessage("You Lose");
     }else if (fin && !ganoDealer){
+        dibujaMensaje3d(0.7);
         drawHelpMessage("You Win!!");
     }else if(!fin && deal){
+        dibujaMensaje3d(0.3);
         drawHelpMessage("Hit or stand");
     }else {
+        dibujaMensaje3d(0);
         drawHelpMessage("New Deal?");
     }
     drawText(-400, 850, 0.5, "BLACKJACK", GLUT_BITMAP_9_BY_15);
@@ -293,7 +347,6 @@ void dibuja()
     if(turnoDealer>3){
         dibujaCarta3d(160,215);}
     glColor3f(1.0, 1.0, 1.0);
-    
     glutSwapBuffers();
 }
 
