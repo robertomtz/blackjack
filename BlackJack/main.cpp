@@ -21,12 +21,29 @@ int turnoDealer=1;
 int as=0;
 int asDealer=0;
 const float medida = 40;
+float x=1.0;
 
+bool rotate3d=false;
 bool stand=false;
 bool fin=false;
 bool deal=false;//checa que solo se pueda dealear una vez
 bool ganoDealer=false;
 Deck deck = Deck();
+
+void myTimer(int v)
+{
+    if (rotate3d) {
+        x=x+1;
+        if (x >= 180) {
+            x = 0;
+            rotate3d = false;
+        }
+
+    }
+    glutPostRedisplay();
+    glutTimerFunc(5, myTimer, 1);
+
+}
 
 void init()
 {
@@ -143,7 +160,7 @@ void dibujaMensaje3d(float g){
 
     glPushMatrix();
     glTranslatef(210, 250, -100);
-    glRotatef(4, 1.0, 1.0, 0.0);
+    glRotatef(x, 1.0, 0, 0);
 
     glBegin(GL_QUADS);
     glColor3f(0.4, g, 0.7);
@@ -366,6 +383,7 @@ void myKey(unsigned char theKey, int mouseX, int mouseY)
     {
         case 'h':
         case 'H':
+            rotate3d=true;
             if(turno<4 && !stand){
                 turno++;
             }
@@ -373,11 +391,13 @@ void myKey(unsigned char theKey, int mouseX, int mouseY)
             
         case 's':
         case 'S':
+            rotate3d=true;
             stand=true;
             break;
             
         case 'd':
         case 'D':
+            rotate3d=true;
             if(!deal){
                 deal=true;
                 deck.shuffle();
@@ -429,6 +449,7 @@ int main(int argc, char *argv[])
     glEnable(GL_DEPTH_TEST);
     glutKeyboardFunc(myKey);
     glutDisplayFunc(dibuja);
+    glutTimerFunc(5, myTimer, 1);
     glutReshapeFunc(reshape);
     glutMainLoop();
     return 0;
