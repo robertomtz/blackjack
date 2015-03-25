@@ -20,6 +20,7 @@ int turno=1;
 int turnoDealer=1;
 int as=0;
 int asDealer=0;
+const float medida = 40;
 
 bool stand=false;
 bool fin=false;
@@ -80,12 +81,61 @@ void drawHelpMessage(std::string text){
     }
 }
 
-void dibujaRectangulo3dGrande(){
+void dibujaCarta3d(float x, float y){
+
     glPushMatrix();
-    glTranslatef(-200, 300,  -280);
-    glRotatef(10, 1, 1, 0);
-    glScaled(1, 2.125, 1);
-    glutSolidCube(0.3);
+    glTranslatef(x, y, 0);
+    glRotatef(4, 1.0, 1.0, 0.0);
+
+    glBegin(GL_QUADS);
+    //Arriba (amarillo)
+    glColor3f(1.0, 1.0, 0.0);
+    glVertex3f( -medida, medida*2.125, -medida );
+    glVertex3f( -medida, medida*2.125,  medida );
+    glVertex3f(  medida, medida*2.125,  medida );
+    glVertex3f(  medida, medida*2.125, -medida );
+
+    //Abajo (magenta)
+    glColor3f(0.0, 1.0, 0.0);
+    glVertex3f( -medida, -medida*2.125, -medida );
+    glVertex3f(  medida, -medida*2.125, -medida );
+    glVertex3f(  medida, -medida*2.125,  medida );
+    glVertex3f( -medida, -medida*2.125,  medida );
+
+    //Izquierda (azules)
+    glColor3f(0.0, 1.0, 1.0);
+    glVertex3f( -medida, -medida*2.125, -medida );
+    glVertex3f( -medida, -medida*2.125,  medida );
+    glColor3f(1.0, 0.0, 0.0);
+    glVertex3f( -medida,  medida*2.125,  medida );
+    glColor3f(0.0, 1.0, 0.0);
+    glVertex3f( -medida,  medida*2.125, -medida );
+
+    //Derecha (rojo y verde)
+    glColor3f(1.0, 0.0, 0.0);
+    glVertex3f( medida, -medida*2.125, -medida );
+    glVertex3f( medida,  medida*2.125, -medida );
+    glColor3f(0.0, 1.0, 0.0);
+    glVertex3f( medida,  medida*2.125,  medida );
+    glVertex3f( medida, -medida*2.125,  medida );
+
+    // Blanco
+    glColor3f(1.0, 0.0, 0.0);
+    //Frente blanco
+    glVertex3f( -medida, -medida*2.125, medida );
+    glVertex3f(  medida, -medida*2.125, medida );
+    glVertex3f(  medida,  medida*2.125, medida );
+    glVertex3f( -medida,  medida*2.125, medida );
+
+    glColor3f(1.0, 1.0, 1.0);
+    //Atrás blanco
+    glVertex3f( -medida, -medida*2.125, -medida );
+    glVertex3f( -medida,  medida*2.125, -medida );
+    glVertex3f(  medida,  medida*2.125, -medida );
+    glVertex3f(  medida, -medida*2.125, -medida );
+
+    glEnd();
+
     glPopMatrix();
 }
 
@@ -177,7 +227,7 @@ void dibuja()
     }
 
     glColor3d(1,1,1);
-    dibujaRectangulo3dGrande();
+    dibujaCarta3d(100,100);
     if (fin && ganoDealer) {
         drawHelpMessage("You Lose");
     }else if (fin && !ganoDealer){
@@ -307,10 +357,11 @@ void reshape(int ancho, int alto)
     // Sistema de coordenadas
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(-500, 500, -500, 500,1,12 ); //izq, der, abajo, arriba, cerca, lejos
+    glOrtho(-500, 500, -500, 500,100, 300.0 ); //izq, der, abajo, arriba, cerca, lejos
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    gluLookAt(0, 0, 10, 0, 0, 0, 0, 1, 0);
+    gluLookAt(0, 0, 200, 0, 0, 0, 0, 1, 0);
+
 }
 
 int main(int argc, char *argv[])
@@ -322,6 +373,7 @@ int main(int argc, char *argv[])
     glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH| GLUT_DOUBLE );
     glutCreateWindow("Blackjack A01190757 - A01190871");
     init();
+    glEnable(GL_DEPTH_TEST);
     glutKeyboardFunc(myKey);
     glutDisplayFunc(dibuja);
     glutReshapeFunc(reshape);
