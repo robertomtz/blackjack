@@ -28,6 +28,7 @@ bool stand=false;
 bool fin=false;
 bool deal=false;//checa que solo se pueda dealear una vez
 bool ganoDealer=false;
+bool shopas=false;
 Deck deck = Deck();
 
 void myTimer(int v)
@@ -293,10 +294,18 @@ void dibuja()
     glColor3d(1,1,1);
     if (fin && ganoDealer) {
         dibujaMensaje3d(1);
-        drawHelpMessage("You Lose");
+        if (shopas) {
+            drawHelpMessage("New Deal?");
+        }else{
+            drawHelpMessage("You Lose");
+        }
     }else if (fin && !ganoDealer){
         dibujaMensaje3d(0.7);
-        drawHelpMessage("You Win!!");
+        if (shopas) {
+            drawHelpMessage("New Deal?");
+        }else{
+            drawHelpMessage("You Win!!");
+        }
     }else if(!fin && deal){
         dibujaMensaje3d(0.3);
         drawHelpMessage("Hit or stand");
@@ -384,6 +393,8 @@ void myKey(unsigned char theKey, int mouseX, int mouseY)
             rotate3d=true;
             if(turno<4 && !stand){
                 turno++;
+            } else{
+                shopas=true;
             }
             break;
             
@@ -406,6 +417,7 @@ void myKey(unsigned char theKey, int mouseX, int mouseY)
                 stand=false;
                 fin=false;
                 ganoDealer=false;
+                shopas=false;
             }
             break;
             
