@@ -103,6 +103,8 @@ void dibujaCarta3d(float x, float y){
     glPushMatrix();
     glTranslatef(x, y, -100);
     glRotatef(xRotate, 0, 1.0, 0);
+    
+    glColor3d(1, .5, .5);
 
     glBegin(GL_QUADS);
     //Arriba (amarillo)
@@ -117,6 +119,7 @@ void dibujaCarta3d(float x, float y){
     glVertex3f(  medida, -medida*2.125,  medida );
     glVertex3f( -medida, -medida*2.125,  medida );
 
+    glColor3f(0, 0, 1);
     //Izquierda (azules)
     glVertex3f( -medida, -medida*2.125, -medida );
     glVertex3f( -medida, -medida*2.125,  medida );
@@ -129,6 +132,8 @@ void dibujaCarta3d(float x, float y){
     glVertex3f( medida,  medida*2.125,  medida );
     glVertex3f( medida, -medida*2.125,  medida );
 
+    
+    glColor3d(1, .5, .5);
     //Frente blanco
     glVertex3f( -medida, -medida*2.125, medida );
     glVertex3f(  medida, -medida*2.125, medida );
@@ -150,10 +155,12 @@ void dibujaMensaje3d(float g){
 
     glPushMatrix();
     glTranslatef(210, 250, -100);
-    glRotatef(xRotate, 1.0, 0, 0);
+    glRotatef(xRotate, 1.0, 0.0, 0);
 
     glBegin(GL_QUADS);
     glColor3f(0.4, g, 0.7);
+    
+    glColor3f(1, 0, 0);
     //Arriba
     glVertex3f( -medida*5.125, medida, -medida );
     glVertex3f( -medida*5.125, medida,  medida );
@@ -165,7 +172,7 @@ void dibujaMensaje3d(float g){
     glVertex3f(  medida*5.125, -medida, -medida );
     glVertex3f(  medida*5.125, -medida,  medida );
     glVertex3f( -medida*5.125, -medida,  medida );
-
+glColor3f(0.4, g, 0.7);
     //Izquierda
     glVertex3f( -medida*5.125, -medida, -medida );
     glVertex3f( -medida*5.125, -medida,  medida );
