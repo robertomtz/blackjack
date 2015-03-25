@@ -24,6 +24,7 @@ int asDealer=0;
 bool stand=false;
 bool fin=false;
 bool deal=false;//checa que solo se pueda dealear una vez
+bool ganoDealer=false;
 Deck deck = Deck();
 
 void init()
@@ -57,7 +58,23 @@ void drawText(float x, float y, float size, std::string text, void* font) {
         glScaled(size, size, 0);
         glTranslatef(x, y, 0);
         char c = *i;
-        glutStrokeCharacter(GLUT_STROKE_ROMAN, c);
+        glutStrokeCharacter(GLUT_STROKE_MONO_ROMAN, c);
+        glPopMatrix();
+        x+=75;
+    }
+}
+
+void drawHelpMessage(std::string text){
+    glMatrixMode(GL_MODELVIEW);
+    float x = 100;
+    float y = 600;
+    float size = 0.4;
+    for (std::string::iterator i = text.begin(); i != text.end(); ++i) {
+        glPushMatrix();
+        glScaled(size, size, 0);
+        glTranslatef(x, y, 0);
+        char c = *i;
+        glutStrokeCharacter(GLUT_STROKE_MONO_ROMAN, c);
         glPopMatrix();
         x+=75;
     }
@@ -65,8 +82,9 @@ void drawText(float x, float y, float size, std::string text, void* font) {
 
 void dibuja()
 {
-    
-    
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glColor3d(1,1,1);
+    drawHelpMessage("New Deal?");
     //puntos actuales jugador y dealer
     char value;
     int vala = 0;
@@ -97,13 +115,15 @@ void dibuja()
     if (points==21) {
         stand=true;
     }
-    
-    
+
+
+
     asDealer=0;
     if (stand) {
         while (!fin) {
             if (points>21) {
                 scoreDealer++;
+                ganoDealer = true;
                 fin=true;
                 deal=false;
             } else if (pointsDealer<17) {
@@ -143,6 +163,7 @@ void dibuja()
                     score++;
                 }else{
                     scoreDealer++;
+                    ganoDealer = true;
                 }
             }
         }
@@ -151,8 +172,17 @@ void dibuja()
     
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glColor3d(1,1,1);
+    if (fin && ganoDealer) {
+        drawHelpMessage("You Lose");
+    }else if (fin && !ganoDealer){
+        drawHelpMessage("You Win!!");
+    }else if(!fin && deal){
+        drawHelpMessage("Hit or stand");
+    }else {
+        drawHelpMessage("New Deal?");
+    }
     drawText(-400, 850, 0.5, "BLACKJACK", GLUT_BITMAP_9_BY_15);
-    
+
     drawText(-1000, 850, 0.4, "SCORE " +toString(score), GLUT_BITMAP_9_BY_15);
     drawText(-100, 850, 0.4, "SCORE DEALER " +toString(scoreDealer), GLUT_BITMAP_9_BY_15);
     
@@ -217,11 +247,6 @@ void dibuja()
     if(turnoDealer>3){
         glRectd( 200, 300,  120, 130);}
     
-    glPushMatrix() ;
-    glTranslated(0, 0, 0);
-   
-    glPopMatrix();
-    
     glutSwapBuffers();
 }
 
@@ -253,6 +278,7 @@ void myKey(unsigned char theKey, int mouseX, int mouseY)
                 turnoDealer=1;
                 stand=false;
                 fin=false;
+                ganoDealer=false;
             }
             break;
             
