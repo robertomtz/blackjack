@@ -84,50 +84,40 @@ void drawHelpMessage(std::string text){
 void dibujaCarta3d(float x, float y){
 
     glPushMatrix();
-    glTranslatef(x, y, 0);
+    glTranslatef(x, y, -100);
     glRotatef(4, 1.0, 1.0, 0.0);
 
     glBegin(GL_QUADS);
     //Arriba (amarillo)
-    glColor3f(1.0, 1.0, 0.0);
     glVertex3f( -medida, medida*2.125, -medida );
     glVertex3f( -medida, medida*2.125,  medida );
     glVertex3f(  medida, medida*2.125,  medida );
     glVertex3f(  medida, medida*2.125, -medida );
 
     //Abajo (magenta)
-    glColor3f(0.0, 1.0, 0.0);
     glVertex3f( -medida, -medida*2.125, -medida );
     glVertex3f(  medida, -medida*2.125, -medida );
     glVertex3f(  medida, -medida*2.125,  medida );
     glVertex3f( -medida, -medida*2.125,  medida );
 
     //Izquierda (azules)
-    glColor3f(0.0, 1.0, 1.0);
     glVertex3f( -medida, -medida*2.125, -medida );
     glVertex3f( -medida, -medida*2.125,  medida );
-    glColor3f(1.0, 0.0, 0.0);
     glVertex3f( -medida,  medida*2.125,  medida );
-    glColor3f(0.0, 1.0, 0.0);
     glVertex3f( -medida,  medida*2.125, -medida );
 
     //Derecha (rojo y verde)
-    glColor3f(1.0, 0.0, 0.0);
     glVertex3f( medida, -medida*2.125, -medida );
     glVertex3f( medida,  medida*2.125, -medida );
-    glColor3f(0.0, 1.0, 0.0);
     glVertex3f( medida,  medida*2.125,  medida );
     glVertex3f( medida, -medida*2.125,  medida );
 
-    // Blanco
-    glColor3f(1.0, 0.0, 0.0);
     //Frente blanco
     glVertex3f( -medida, -medida*2.125, medida );
     glVertex3f(  medida, -medida*2.125, medida );
     glVertex3f(  medida,  medida*2.125, medida );
     glVertex3f( -medida,  medida*2.125, medida );
 
-    glColor3f(1.0, 1.0, 1.0);
     //Atrás blanco
     glVertex3f( -medida, -medida*2.125, -medida );
     glVertex3f( -medida,  medida*2.125, -medida );
@@ -227,7 +217,6 @@ void dibuja()
     }
 
     glColor3d(1,1,1);
-    dibujaCarta3d(100,100);
     if (fin && ganoDealer) {
         drawHelpMessage("You Lose");
     }else if (fin && !ganoDealer){
@@ -270,14 +259,14 @@ void dibuja()
     
     
     glColor3d(0, .5, .5);
-    glRectd(-200, 20, -280, -150);
-    glRectd(-100, 20, -180, -150);
+    dibujaCarta3d(-240,-85);
+    dibujaCarta3d(-140,-85);
     if(turno>1){
-        glRectd(   0, 20,  -80, -150);}
+        dibujaCarta3d(-40,-85);}
     if(turno>2){
-        glRectd( 100, 20,   20, -150);}
+        dibujaCarta3d(60,-85);}
     if(turno>3){
-        glRectd( 200, 20,  120, -150);}
+        dibujaCarta3d(160,-85);}
     
     
     
@@ -293,15 +282,17 @@ void dibuja()
         if (turnoDealer>3) {
             drawText(340, 400, 0.4,cToString(deck.getSuit(9)) +cToString(deck.getValue(9)), GLUT_BITMAP_9_BY_15);}
     
+    
     glColor3d(1, .5, .5);
-    glRectd(-200, 300, -280, 130);
-    glRectd(-100, 300, -180, 130);
+    dibujaCarta3d(-240,215);
+    dibujaCarta3d(-140,215);
     if(turnoDealer>1){
-        glRectd(   0, 300,  -80, 130);}
+        dibujaCarta3d(-40,215);}
     if(turnoDealer>2){
-        glRectd( 100, 300,   20, 130);}
+        dibujaCarta3d(60,215);}
     if(turnoDealer>3){
-        glRectd( 200, 300,  120, 130);}
+        dibujaCarta3d(160,215);}
+    glColor3f(1.0, 1.0, 1.0);
     
     glutSwapBuffers();
 }
