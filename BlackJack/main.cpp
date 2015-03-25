@@ -80,12 +80,19 @@ void drawHelpMessage(std::string text){
     }
 }
 
+void dibujaRectangulo3dGrande(){
+    glPushMatrix();
+    glTranslatef(-200, 300,  -280);
+    glRotatef(10, 1, 1, 0);
+    glScaled(1, 2.125, 1);
+    glutSolidCube(0.3);
+    glPopMatrix();
+}
+
 void dibuja()
 {
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glColor3d(1,1,1);
-    drawHelpMessage("New Deal?");
     //puntos actuales jugador y dealer
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     char value;
     int vala = 0;
     as=0;
@@ -168,10 +175,9 @@ void dibuja()
             }
         }
     }
-    
-    
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
     glColor3d(1,1,1);
+    dibujaRectangulo3dGrande();
     if (fin && ganoDealer) {
         drawHelpMessage("You Lose");
     }else if (fin && !ganoDealer){
@@ -193,8 +199,8 @@ void dibuja()
     drawText(800, -300, 0.3, "PLAYER " +toString(points), GLUT_BITMAP_9_BY_15);
     
     drawText(-1200, -900, 0.4, "D-DEAL H-HIT S-STAND ESC-SALIR", GLUT_BITMAP_9_BY_15);
-    drawText(-1200, -1200, 0.4, "AUTOR: ROBERTO MTZ A01190757 ", GLUT_BITMAP_9_BY_15);
-    
+    drawText(-1200, -1100, 0.4, "AUTOR: ROBERTO MTZ A01190757 ", GLUT_BITMAP_9_BY_15);
+    drawText(-1200, -1230, 0.4, "AUTOR: ADRIAN RANGEL A01190871 ", GLUT_BITMAP_9_BY_15);
     
     points = 0;
     pointsDealer = 0;
@@ -314,7 +320,7 @@ int main(int argc, char *argv[])
     glutInitWindowSize(640,480);
     glutInitWindowPosition(10,10);
     glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH| GLUT_DOUBLE );
-    glutCreateWindow("Blackjack A01190757");
+    glutCreateWindow("Blackjack A01190757 - A01190871");
     init();
     glutKeyboardFunc(myKey);
     glutDisplayFunc(dibuja);
